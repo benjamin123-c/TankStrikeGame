@@ -101,7 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointsList:
-  - {fileID: 4088299244086443866, guid: 14a6a4bdb82cde74798c711d3955e0f9, type: 3}
-  - {fileID: 5812806693914137204, guid: fa5f66215411f054d8b90fd204def17c, type: 3}
-  - {fileID: 6253161950029974890, guid: 0934765f3eb2e054a961be431fe9026c, type: 3}
+  - {fileID: 3362096451184863503, guid: 14a6a4bdb82cde74798c711d3955e0f9, type: 3}
+  - {fileID: 1852060075809540103, guid: fa5f66215411f054d8b90fd204def17c, type: 3}
+  - {fileID: 4287034764419059851, guid: 0934765f3eb2e054a961be431fe9026c, type: 3}
+  - {fileID: 2903822116199582998, guid: 9f3db7c2a4e27804fad48c53619064cd, type: 3}
+  waveConfig: {fileID: 11400000, guid: e3b6a0d429a561e46a2d17f680763f5a, type: 2}
   moveSpeed: 5

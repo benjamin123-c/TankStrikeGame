@@ -6,13 +6,21 @@ public class EnemyPathing : MonoBehaviour
 {
     [SerializeField] List<Transform> waypointsList;
 
+    //create an object of WaveConfig to access its variable
+    [SerializeField] WaveConfig waveConfig;
+
     [SerializeField] float moveSpeed = 2f;
+
+    
 
     //index of the current waypoint the enemy is moving towards
     int waypointIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //get the list of waypoints from the waveConfig
+        waypointsList = waveConfig.GetPathPrefab();
+       
        //set the enemy's position to the first waypoint
        transform.position = waypointsList[waypointIndex].transform.position;
     }
