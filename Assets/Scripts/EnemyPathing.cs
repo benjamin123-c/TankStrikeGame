@@ -7,9 +7,9 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] List<Transform> waypointsList;
 
     //create an object of WaveConfig to access its variable
-    [SerializeField] WaveConfig waveConfig;
+     WaveConfig waveConfig;
 
-    [SerializeField] float moveSpeed = 2f;
+    
 
     
 
@@ -30,6 +30,12 @@ public class EnemyPathing : MonoBehaviour
     {
         EnemyMovement();
     }
+
+    //method to set the waveConfig for this enemy
+    public void SetWaveConfig(WaveConfig waveConfigToSet)
+    { 
+        waveConfig = waveConfigToSet;
+    }
     void EnemyMovement()
     {
         //if the enemy has not reached the last waypoint
@@ -40,7 +46,7 @@ public class EnemyPathing : MonoBehaviour
 
             targetPosition.z = 0f; //keep z position at 0 for 2D
 
-            var movementThisFrame = moveSpeed * Time.deltaTime;
+            var movementThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
             //move the enemy towards the next waypoint
             transform.position = Vector2.MoveTowards(transform.position,
                 targetPosition, movementThisFrame);

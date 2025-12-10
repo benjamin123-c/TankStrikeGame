@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -9,19 +10,39 @@ public class EnemySpawner : MonoBehaviour
 
     int startingWave = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //get the current wave configuration
-        WaveConfig currentWave = waveConfigList[startingWave];
+    [SerializeField] bool looping = false;
 
-        //start the coroutine to spawn all enemies in the current wave
-        StartCoroutine(SpawnAllEnemiesInWave(currentWave));
-    }
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   IEnumerator Start()
+   {
+        do
+        {
+            //get the current wave configuration
+            WaveConfig currentWave = waveConfigList[startingWave];
+
+            //start the coroutine to spawn waves
+            yield return StartCoroutine(SpawnAllWaves());
+        }
+        // when coroutine finishes, check  if looping is true to restart
+        while(looping);
+        
+   }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    //create a coroutine to spawn all waves
+    IEnumerator SpawnAllWaves()
+    {
+        foreach (WaveConfig waveConfig in waveConfigList)
+        {
+            //start the coroutine to spawn all enemies in the wave
+            yield return StartCoroutine(SpawnAllEnemiesInWave(waveConfig));
+        }
+           
         
     }
 
@@ -32,10 +53,14 @@ public class EnemySpawner : MonoBehaviour
         for (int enemyCount = 1; enemyCount <= waveConfig.GetNumberOfEnemies(); enemyCount++)
         {
             //spawn an enemy at the position of the first waypoint in the pathPrefab
-            Instantiate(
+            GameObject newEnemy = Instantiate(
                 waveConfig.GetEnemyPrefab(),
                 waveConfig.GetPathPrefab()[0].transform.position,
                 Quaternion.identity);
+
+            //set the waveConfig for the newly spawned enemy
+            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
+
             //wait for the specified time before spawning the next enemy
             yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
 
