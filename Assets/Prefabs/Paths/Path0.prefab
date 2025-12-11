@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9193345459525257494}
-  - component: {fileID: 4348478146230307658}
+  - component: {fileID: 1061508552021847093}
   m_Layer: 0
   m_Name: Path0
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5699876935885020912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4348478146230307658
+--- !u!114 &1061508552021847093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1445802300422978913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
+  m_Script: {fileID: 11500000, guid: cbab3e383f66a5c4bb0e0b1bfd4acc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointsList: []
-  waveConfig: {fileID: 0}
-  moveSpeed: 2
+  waypoints: []
 --- !u!1001 &7097185515245721113
 PrefabInstance:
   m_ObjectHideFlags: 0

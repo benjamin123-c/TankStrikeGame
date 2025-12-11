@@ -1,69 +1,81 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.SceneManagement;   // Needed for SceneManager
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Wave Settings")]
+    [SerializeField] List<WaveConfig> waveConfigs;   // Your ScriptableObject
+    [SerializeField] bool looping = true;
 
-    [SerializeField] List<WaveConfig> waveConfigList;
+    private int currentWaveIndex = 0;
 
-    int startingWave = 0;
+    // Reference to player (optional, for future bullet homing)
+    public Transform playerTransform;
 
-    [SerializeField] bool looping = false;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-   IEnumerator Start()
-   {
+    IEnumerator Start()
+    {
         do
         {
-            //get the current wave configuration
-            WaveConfig currentWave = waveConfigList[startingWave];
+            WaveConfig currentWave = waveConfigs[currentWaveIndex];
+            yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
 
-            //start the coroutine to spawn waves
-            yield return StartCoroutine(SpawnAllWaves());
-        }
-        // when coroutine finishes, check  if looping is true to restart
-        while(looping);
-        
-   }
+            // Move to next wave
+            currentWaveIndex++;
+            if (currentWaveIndex >= waveConfigs.Count)
+            {
+                currentWaveIndex = 0; // Loop back — required by assignment
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            yield return new WaitForSeconds(2f); // Delay between waves
+
+        } while (looping);
     }
 
-    //create a coroutine to spawn all waves
-    IEnumerator SpawnAllWaves()
+    IEnumerator SpawnAllEnemiesInWave(WaveConfig wave)
     {
-        foreach (WaveConfig waveConfig in waveConfigList)
+        for (int i = 0; i < wave.GetNumberOfEnemies(); i++)
         {
-            //start the coroutine to spawn all enemies in the wave
-            yield return StartCoroutine(SpawnAllEnemiesInWave(waveConfig));
-        }
-           
-        
-    }
+            // Instantiate the path prefab and get its waypoints
+            GameObject pathInstance = Instantiate(wave.pathPrefab, Vector3.zero, Quaternion.identity);
 
-    //coroutine to spawn all enemies in a wave
-    IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
-    {
-        //spawn enemies based on the number specified in the wavwConfig
-        for (int enemyCount = 1; enemyCount <= waveConfig.GetNumberOfEnemies(); enemyCount++)
-        {
-            //spawn an enemy at the position of the first waypoint in the pathPrefab
-            GameObject newEnemy = Instantiate(
-                waveConfig.GetEnemyPrefab(),
-                waveConfig.GetPathPrefab()[0].transform.position,
+            // Get the first waypoint position
+            Vector3 startPos = wave.GetPathPrefab()[0].position;
+
+            // Spawn the enemy
+            GameObject enemy = Instantiate(
+                wave.GetEnemyPrefab(),
+                startPos,
                 Quaternion.identity);
 
-            //set the waveConfig for the newly spawned enemy
-            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
+            // === Set correct damage (Task 2c) ===
+            DamageDealer damageDealer = enemy.GetComponent<DamageDealer>();
+            if (damageDealer != null)
+            {
+                int waveNumber = currentWaveIndex + 1; // Wave 1 = index 0 → waveNumber 1
+                damageDealer.SetDamageByWave(waveNumber); // Sets 2, 4, 6, 8
+            }
 
-            //wait for the specified time before spawning the next enemy
-            yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
+            // === Set up movement using YOUR existing EnemyPathing script ===
+            EnemyPathing enemyPathing = enemy.GetComponent<EnemyPathing>();
+            if (enemyPathing != null)
+            {
+                enemyPathing.SetWaveConfig(wave); // This gives it access to path & speed
+            }
 
+            // === Level 2: Add bullet shooting ===
+            if (SceneManager.GetActiveScene().name.Contains("Level2") || 
+                SceneManager.GetActiveScene().name == "Level2")
+            {
+                if (enemy.GetComponent<BulletShooter>() == null)
+                {
+                    enemy.AddComponent<BulletShooter>();
+                }
+            }
+
+            // Wait before spawning next enemy in this wave
+            yield return new WaitForSeconds(wave.GetTimeBetweenSpawns());
         }
     }
 }
