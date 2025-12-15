@@ -1,66 +1,36 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyPathing : MonoBehaviour
 {
-    [SerializeField] List<Transform> waypointsList;
-
-    //create an object of WaveConfig to access its variable
-     WaveConfig waveConfig;
-
-    
-
-    
-
-    //index of the current waypoint the enemy is moving towards
+    WaveConfig waveConfig;
+    List<Transform> waypoints;
     int waypointIndex = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void SetWaveConfig(WaveConfig waveConfig)
     {
-        //get the list of waypoints from the waveConfig
-        waypointsList = waveConfig.GetPathPrefab();
-       
-       //set the enemy's position to the first waypoint
-       transform.position = waypointsList[waypointIndex].transform.position;
+        this.waveConfig = waveConfig;
+        waypoints = waveConfig.GetPathPrefab();           // Get all waypoints from the path prefab
+        transform.position = waypoints[0].position;       // Start at first waypoint
+        waypointIndex = 1;                                // Next target = index 1
     }
 
-    // Update is called once per frame
     void Update()
     {
-        EnemyMovement();
-    }
-
-    //method to set the waveConfig for this enemy
-    public void SetWaveConfig(WaveConfig waveConfigToSet)
-    { 
-        waveConfig = waveConfigToSet;
-    }
-    void EnemyMovement()
-    {
-        //if the enemy has not reached the last waypoint
-        if (waypointIndex < waypointsList.Count)
+        if (waypointIndex < waypoints.Count)
         {
-            //get the position of the next waypoint
-            var targetPosition = waypointsList[waypointIndex].transform.position;
+            Vector3 targetPosition = waypoints[waypointIndex].position;
+            float speedThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
 
-            targetPosition.z = 0f; //keep z position at 0 for 2D
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, speedThisFrame);
 
-            var movementThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
-            //move the enemy towards the next waypoint
-            transform.position = Vector2.MoveTowards(transform.position,
-                targetPosition, movementThisFrame);
-            //if the enemy has reached the current waypiont
             if (transform.position == targetPosition)
-            {
-                //increment the waypoint index to move to the next waypoint
                 waypointIndex++;
-            }
-            
         }
-        else //reach the last waypoint
+        else
         {
-            Destroy(gameObject); // destroy the enemy object
+            // Reached the end → destroy (or damage player if you want)
+            Destroy(gameObject);
         }
     }
 }

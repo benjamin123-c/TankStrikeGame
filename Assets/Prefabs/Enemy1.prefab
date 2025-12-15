@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3452962101548435483}
   - component: {fileID: 2591888979546279252}
-  - component: {fileID: 1698276016273752432}
   - component: {fileID: -4317304410441813205}
   - component: {fileID: 6218207726833453771}
   - component: {fileID: -2822455391299325579}
+  - component: {fileID: -989011472473730649}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -91,19 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1698276016273752432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943379008287158263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypointsList: []
 --- !u!61 &-4317304410441813205
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,3 +205,15 @@ PolygonCollider2D:
       - {x: 0.205, y: 0.22}
       - {x: 0.185, y: 0.26999998}
   m_UseDelaunayMesh: 0
+--- !u!114 &-989011472473730649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6943379008287158263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

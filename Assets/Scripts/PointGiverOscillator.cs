@@ -1,33 +1,19 @@
-using System.Collections;
 using UnityEngine;
 
-public class PointGiverSpawner : MonoBehaviour
+public class PointGiverOscillator : MonoBehaviour
 {
-    public PointGiverConfig config;
-    public int totalToSpawn = 10;
-    public GameObject bottomDestroy; // Empty at y=-11
-    private int spawned = 0;
-    private bool isLevel1 = true;
+    public float amplitude = 8f;
+    public float speed = 0.8f;
+    private Vector3 startPos;
 
     void Start()
     {
-        StartCoroutine(SpawnPointGivers());
+        startPos = transform.position;
     }
 
-    IEnumerator SpawnPointGivers()
+    void Update()
     {
-        for (int i = 0; i < totalToSpawn; i++)
-        {
-            float delay = Random.Range(config.minSpawnTime, config.maxSpawnTime);
-            yield return new WaitForSeconds(delay);
-            GameObject pg = Instantiate(config.pointGiverPrefab, transform.position, Quaternion.identity);
-            pg.AddComponent<PointGiverMovement>().Init(5f, bottomDestroy.transform);
-            spawned++;
-            if (spawned == totalToSpawn && isLevel1)
-            {
-                yield return new WaitForSeconds(5f); // Wait for last to fall
-                LevelManager.Instance.LoadScene("Level2");
-            }
-        }
+        float x = Mathf.Sin(Time.time * speed) * amplitude;
+        transform.position = new Vector3(startPos.x + x, transform.position.y, 0);
     }
 }

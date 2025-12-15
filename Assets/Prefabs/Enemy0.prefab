@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3925392992279836420}
   - component: {fileID: 7594503388339080476}
-  - component: {fileID: -5516831220895385321}
   - component: {fileID: 1869084633875478372}
   - component: {fileID: 950936764514746932}
   - component: {fileID: 5448264004384125762}
+  - component: {fileID: -1969493805902991605}
   m_Layer: 0
   m_Name: Enemy0
   m_TagString: Untagged
@@ -91,23 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5516831220895385321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4700225213239895148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypointsList:
-  - {fileID: 3362096451184863503, guid: 14a6a4bdb82cde74798c711d3955e0f9, type: 3}
-  - {fileID: 1852060075809540103, guid: fa5f66215411f054d8b90fd204def17c, type: 3}
-  - {fileID: 4287034764419059851, guid: 0934765f3eb2e054a961be431fe9026c, type: 3}
-  - {fileID: 2903822116199582998, guid: 9f3db7c2a4e27804fad48c53619064cd, type: 3}
 --- !u!61 &1869084633875478372
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,3 +207,16 @@ PolygonCollider2D:
       - {x: 0.22999999, y: 0.29999998}
       - {x: 0.22, y: 0.32}
   m_UseDelaunayMesh: 0
+--- !u!114 &-1969493805902991605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700225213239895148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointsList: []

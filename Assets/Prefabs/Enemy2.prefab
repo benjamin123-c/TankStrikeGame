@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6674291048081436748}
   - component: {fileID: 7641750797316746374}
-  - component: {fileID: 7701208987467323653}
   - component: {fileID: 2835783207935266738}
   - component: {fileID: 2413250267154487232}
   - component: {fileID: -2060380611870607590}
+  - component: {fileID: -5160383638032908198}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -91,19 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7701208987467323653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4418012475202270120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypointsList: []
 --- !u!60 &2835783207935266738
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -219,3 +206,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 6
   isBullet: 0
+--- !u!114 &-5160383638032908198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418012475202270120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointsList: []

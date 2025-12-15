@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6000016724652675206}
   - component: {fileID: 6014194223656902248}
-  - component: {fileID: 6217336815820130251}
   - component: {fileID: 255491533168835807}
   - component: {fileID: -7852918377132118890}
   - component: {fileID: 5693830642895512344}
+  - component: {fileID: 2182939813888433342}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -91,19 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6217336815820130251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2473541921191832891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypointsList: []
 --- !u!60 &255491533168835807
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -219,3 +206,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 8
   isBullet: 0
+--- !u!114 &2182939813888433342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473541921191832891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8f92068c3fa34439e514da5574284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointsList: []

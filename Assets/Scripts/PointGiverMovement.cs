@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class PointGiverMovement : MonoBehaviour
 {
-    float speed;
-    Transform destroyPoint;
+    private float speed;
+    private Transform destroyPoint;
 
-    public void Init(float s, Transform dp)
+    public void Init(float fallSpeed, Transform destroy)
     {
-        speed = s;
-        destroyPoint = dp;
+        speed = fallSpeed;
+        destroyPoint = destroy;
     }
 
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
-        if (transform.position.y < destroyPoint.position.y) Destroy(gameObject);
+
+        if (transform.position.y < destroyPoint.position.y)
+            Destroy(gameObject);
     }
 }
