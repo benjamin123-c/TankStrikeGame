@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6617079221046357543}
   - component: {fileID: 2682320438763604566}
   - component: {fileID: 4746315197133432204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -274,3 +274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  hitSound: {fileID: 8300000, guid: 5dd9bbe203f0c8543b2a051e35e11593, type: 3}
+  collectSound: {fileID: 8300000, guid: df405fa7adc9a3746b66cfe56ff8984d, type: 3}
+  explosionPrefab: {fileID: 0}

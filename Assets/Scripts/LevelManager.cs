@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro; // For TextMeshProUGUI
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,11 +10,11 @@ public class LevelManager : MonoBehaviour
     public int health = 100;
     public int score = 0;
 
-    [Header("UI References (Drag in Level1 & Level2)")]
-    public Text healthText;
-    public Text scoreText;
+    [Header("UI References")]
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI scoreText;
 
-    [Header("Scenes Names")]
+    [Header("Scene Names")]
     public string level1Scene = "Level1";
     public string level2Scene = "Level2";
     public string gameOverScene = "GameOver";
@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton + persist between scenes
+        // Singleton pattern - persists across scenes
         if (Instance == null)
         {
             Instance = this;
@@ -39,12 +39,14 @@ public class LevelManager : MonoBehaviour
         UpdateUI();
     }
 
+    // Called when player collects a point-giver
     public void AddScore(int points)
     {
         score += points;
         UpdateUI();
     }
 
+    // Called when player takes damage
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -57,9 +59,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel2()
+    // Called by PointGiverSpawner after the 10th point-giver
+    public void On10thPointGiverCollected()
     {
-        SceneManager.LoadScene(level2Scene);
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == level1Scene)
+        {
+            SceneManager.LoadScene(level2Scene);
+        }
+        else if (currentScene == level2Scene)
+        {
+            WinGame();
+        }
     }
 
     public void GameOver()
@@ -72,18 +84,13 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(winScene);
     }
 
-    void UpdateUI()
+    // Update UI text
+    private void UpdateUI()
     {
-        if (healthText) healthText.text = "Health: " + health;
-        if (scoreText) scoreText.text = "Score: " + score;
-    }
+        if (healthText != null)
+            healthText.text = "Health: " + health;
 
-    // Call this when 10th point-giver is collected
-    public void On10thPointGiverCollected()
-    {
-        if (SceneManager.GetActiveScene().name == "Level1")
-            SceneManager.LoadScene("Level2");
-        else
-            SceneManager.LoadScene("Win");
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
     }
 }

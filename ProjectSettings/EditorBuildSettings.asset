@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 7fde14cf9d040c340bebe3beda61f150
-  - enabled: 1
     path: Assets/Scenes/TankStrike.unity
     guid: 82eb4ea6eaa336b4d9c2a5bbe85693c6
   - enabled: 1

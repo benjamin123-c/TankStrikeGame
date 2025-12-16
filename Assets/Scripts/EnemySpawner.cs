@@ -11,21 +11,28 @@ public class EnemySpawner : MonoBehaviour
 
     private int currentWaveIndex = 0;
 
+    // REQUIRED BY TASK 2f – Using Coroutines + Timer + Lists + foreach
     IEnumerator Start()
     {
         do
         {
+            // TASK 2f: Spawn all waves using List and index
             WaveConfig currentWave = waveConfigs[currentWaveIndex];
             yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
 
+            // Move to next wave
             currentWaveIndex++;
+
+            // TASK 2f: Restart from beginning when all waves done
             if (currentWaveIndex >= waveConfigs.Count)
                 currentWaveIndex = 0;
 
-            yield return new WaitForSeconds(2f);
-        } while (looping);
+            yield return new WaitForSeconds(2f); // Timer between waves
+
+        } while (looping); // Timer between waves
     }
 
+    // TASK 2f: Coroutine to spawn one full wave
     IEnumerator SpawnAllEnemiesInWave(WaveConfig wave)
     {
         for (int i = 0; i < wave.GetNumberOfEnemies(); i++)
@@ -34,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject enemy = Instantiate(wave.GetEnemyPrefab(), startPos, Quaternion.identity);
 
-            // Damage - Fixed
+            // Set damage (2,4,6,8)
             var dd = enemy.GetComponent<DamageDealer>();
             if (dd != null)
                 dd.SetDamageByWave(currentWaveIndex + 1);

@@ -14,7 +14,6 @@ public class PointGiverMovement : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.down * speed * Time.deltaTime);
-
         if (transform.position.y < destroyPoint.position.y)
             Destroy(gameObject);
     }
