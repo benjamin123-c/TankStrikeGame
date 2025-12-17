@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro; // For TextMeshProUGUI
+using TMPro;               // TextMeshPro
+using UnityEngine.UI;      // Legacy Text
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,8 +12,10 @@ public class LevelManager : MonoBehaviour
     public int score = 0;
 
     [Header("UI References")]
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI healthTextTMP;   // For TextMeshPro "New Text"
+    public TextMeshProUGUI scoreTextTMP;
+    public Text healthTextLegacy;           // For legacy Text (if you used it)
+    public Text scoreTextLegacy;
 
     [Header("Scene Names")]
     public string level1Scene = "Level1";
@@ -22,7 +25,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern - persists across scenes
         if (Instance == null)
         {
             Instance = this;
@@ -39,14 +41,12 @@ public class LevelManager : MonoBehaviour
         UpdateUI();
     }
 
-    // Called when player collects a point-giver
     public void AddScore(int points)
     {
         score += points;
         UpdateUI();
     }
 
-    // Called when player takes damage
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -59,19 +59,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Called by PointGiverSpawner after the 10th point-giver
     public void On10thPointGiverCollected()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == level1Scene)
-        {
+        string current = SceneManager.GetActiveScene().name;
+        if (current == level1Scene || current.Contains("Level1"))
             SceneManager.LoadScene(level2Scene);
-        }
-        else if (currentScene == level2Scene)
-        {
-            WinGame();
-        }
+        else
+            SceneManager.LoadScene(winScene);
     }
 
     public void GameOver()
@@ -84,13 +78,18 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(winScene);
     }
 
-    // Update UI text
     private void UpdateUI()
     {
-        if (healthText != null)
-            healthText.text = "Health: " + health;
+        // TextMeshPro
+        if (healthTextTMP != null)
+            healthTextTMP.text = "Health: " + health;
+        if (scoreTextTMP != null)
+            scoreTextTMP.text = "Score: " + score;
 
-        if (scoreText != null)
-            scoreText.text = "Score: " + score;
+        // Legacy Text (backup)
+        if (healthTextLegacy != null)
+            healthTextLegacy.text = "Health: " + health;
+        if (scoreTextLegacy != null)
+            scoreTextLegacy.text = "Score: " + score;
     }
 }

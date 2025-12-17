@@ -7,30 +7,32 @@ public class EnemyPathing : MonoBehaviour
     List<Transform> waypoints;
     int waypointIndex = 0;
 
-    public void SetWaveConfig(WaveConfig waveConfig)
+    public void SetWaveConfig(WaveConfig waveConfigToSet)
     {
-        this.waveConfig = waveConfig;
-        waypoints = waveConfig.GetPathPrefab();           // Get all waypoints from the path prefab
-        transform.position = waypoints[0].position;       // Start at first waypoint
-        waypointIndex = 1;                                // Next target = index 1
+        this.waveConfig = waveConfigToSet;
+        waypoints = waveConfig.GetPathPrefab();
+
+        if (waypoints != null && waypoints.Count > 0)
+        {
+            transform.position = waypoints[0].position;  // Start at first waypoint
+            waypointIndex = 1;  // Next target = waypoint 1
+        }
     }
 
     void Update()
     {
-        if (waypointIndex < waypoints.Count)
+        if (waveConfig == null || waypoints == null || waypointIndex >= waypoints.Count)
         {
-            Vector3 targetPosition = waypoints[waypointIndex].position;
-            float speedThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, speedThisFrame);
-
-            if (transform.position == targetPosition)
-                waypointIndex++;
+            Destroy(gameObject);  // Safe destroy if null or finished
+            return;
         }
-        else
-        {
-            // Reached the end → destroy (or damage player if you want)
-            Destroy(gameObject);
-        }
+
+        Vector3 targetPosition = waypoints[waypointIndex].position;
+        float speedThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime;
+
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speedThisFrame);
+
+        if (transform.position == targetPosition)
+            waypointIndex++;
     }
 }

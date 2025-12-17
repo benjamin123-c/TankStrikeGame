@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
     [Header("Audio & Effects")]
     public AudioClip hitSound;           // Drag hit.wav here
     public AudioClip collectSound;       // Drag collect.wav here
-    public GameObject explosionPrefab;   // Drag your explosion particle prefab here
+    public GameObject explosionPrefab;   // Drag explosion particle prefab here
 
     private AudioSource audioSource;
 
     void Start()
     {
-        // Camera border calculation (your original code)
+        // Camera border calculation
         mainCamera = Camera.main;
         float playerWidth = transform.localScale.x / 2f;
         minX = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + playerWidth;
@@ -31,34 +31,36 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Your original movement code
+        // Movement
         float inputX = Input.GetAxis("Horizontal");
         Vector3 moveVector = Vector3.right * inputX * moveSpeed * Time.deltaTime;
         transform.position += moveVector;
 
-        // Clamp to camera borders
+        // Clamp to borders
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Damage from enemy or bullet (Task 3c & 3d)
+        // DEBUG LINE – shows every collision
+       // Debug.Log("Collision with: " + other.name + " | Tag: " + other.tag);
+
+        // Damage from enemy or bullet
         DamageDealer dd = other.GetComponent<DamageDealer>();
         if (dd != null)
         {
             LevelManager.Instance.TakeDamage(dd.damage);
             audioSource.PlayOneShot(hitSound);
 
-            // Explosion effect on enemy/bullet
             if (explosionPrefab != null)
                 Instantiate(explosionPrefab, other.transform.position, Quaternion.identity);
 
-            Destroy(other.gameObject);   // Destroy enemy or bullet
+            Destroy(other.gameObject);
             return;
         }
 
-        // Collect point-giver (Task 3e)
+        // Collect point-giver
         if (other.CompareTag("PointGiver"))
         {
             LevelManager.Instance.AddScore(5);

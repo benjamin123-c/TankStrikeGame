@@ -231,5 +231,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3435869765401791754, guid: 46d5081b3e7a18f49ae7fb0f8f1958c5, type: 3}
-  fireRate: 2
+  fireRate: 2.5
   firePoint: {fileID: 0}
