@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PointGiverMovement : MonoBehaviour
 {
-    private float speed;
-    private Transform destroyPoint;
+    float speed = 5f;
+    Transform destroyPoint;
 
-    public void Init(float fallSpeed, Transform destroy)
+    public void Init(float s, Transform dp)
     {
-        speed = fallSpeed;
-        destroyPoint = destroy;
+        speed = s;
+        destroyPoint = dp;
     }
 
     void Update()

@@ -17,24 +17,28 @@ public class PointGiverSpawner : MonoBehaviour
             float delay = Random.Range(config.minSpawnTime, config.maxSpawnTime);
             yield return new WaitForSeconds(delay);
 
-            if (config.pointGiverPrefab != null)
+            if (config.pointGiverPrefab != null && bottomDestroyPoint != null)
             {
                 GameObject pg = Instantiate(config.pointGiverPrefab, transform.position, Quaternion.identity);
-                PointGiverMovement mover = pg.AddComponent<PointGiverMovement>();
+                PointGiverMovement mover = pg.GetComponent<PointGiverMovement>();
+                if (mover == null)
+                    mover = pg.AddComponent<PointGiverMovement>();
                 mover.Init(5f, bottomDestroyPoint.transform);
                 spawnedCount++;
-                Debug.Log("Point giver spawned! Count: " + spawnedCount);
+                Debug.Log("Point giver spawned! Count: " + spawnedCount + " | Position: " + transform.position);
             }
             else
             {
-                Debug.LogError("PointGiverPrefab is NULL – assign in PointGiverSettings!");
+                Debug.LogError("Missing: config.pointGiverPrefab or bottomDestroyPoint!");
             }
 
-            if (spawnedCount == totalToSpawn)
+            // Level transition ONLY after ALL 10 spawned
+            if (spawnedCount >= totalToSpawn)
             {
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(4f);  // Let last one fall
                 if (LevelManager.Instance != null)
                     LevelManager.Instance.On10thPointGiverCollected();
+                yield break;  // Stop spawning
             }
         }
     }
