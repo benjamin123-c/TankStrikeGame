@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TankStrike.unity
-    guid: 82eb4ea6eaa336b4d9c2a5bbe85693c6
+    path: Assets/Scenes/Menu.unity
+    guid: 7fde14cf9d040c340bebe3beda61f150
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 359cc23d300570545a8a9f08a78630e4
@@ -15,11 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Level2.unity
     guid: 6b4304ef09838ec4d958b99aca1a2c53
   - enabled: 1
-    path: Assets/Scenes/Win.unity
-    guid: 810fb1e29be90d945a655350d7c65b5c
-  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 6d42adeacf7adf24aaea9457b37f0d15
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 810fb1e29be90d945a655350d7c65b5c
+  - enabled: 0
+    path: Assets/Scenes/TankStrike.unity
+    guid: 82eb4ea6eaa336b4d9c2a5bbe85693c6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
