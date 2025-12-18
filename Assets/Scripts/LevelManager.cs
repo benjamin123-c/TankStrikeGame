@@ -6,6 +6,7 @@ using UnityEngine.UI;      // Legacy Text
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
+   
 
     [Header("Player Stats")]
     public int health = 100;
@@ -18,7 +19,7 @@ public class LevelManager : MonoBehaviour
     public Text scoreTextLegacy;
 
     [Header("Scene Names")]
-    public string level1Scene = "Level1";
+    [SerializeField] public string level1Scene = "Level1";
     public string level2Scene = "Level2";
     public string gameOverScene = "GameOver";
     public string winScene = "Win";
@@ -63,6 +64,9 @@ public class LevelManager : MonoBehaviour
     {
         string current = SceneManager.GetActiveScene().name;
         if (current == level1Scene || current.Contains("Level1"))
+            SceneManager.LoadScene(level2Scene);
+
+        if (level2Scene != null && level2Scene != "")
             SceneManager.LoadScene(level2Scene);
         else
             SceneManager.LoadScene(winScene);

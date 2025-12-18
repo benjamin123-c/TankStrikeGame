@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f292da15484744a91666ad302fda54, type: 3}
   m_Name: PointGiverSettings
   m_EditorClassIdentifier: 
-  pointGiverPrefab: {fileID: 6793829296677467617, guid: 90ea2be59707a394aacd7526135b6a5b, type: 3}
-  minSpawnTime: 2
-  maxSpawnTime: 6
+  pointGiverPrefab: {fileID: 1050357869191632946, guid: b6b30e9c7657e8049b4517ff3f1f21a4, type: 3}
+  minSpawnTime: 0.1
+  maxSpawnTime: 0.2
