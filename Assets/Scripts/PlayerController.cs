@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // DEBUG LINE – shows every collision
-       // Debug.Log("Collision with: " + other.name + " | Tag: " + other.tag);
+        //Debug.Log("Collision with: " + other.name + " Tag: " + other.tag);
 
         // Damage from enemy or bullet
         DamageDealer dd = other.GetComponent<DamageDealer>();
