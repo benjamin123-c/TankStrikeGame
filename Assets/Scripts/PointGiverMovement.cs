@@ -5,15 +5,20 @@ public class PointGiverMovement : MonoBehaviour
     private float speed = 5f;
     private Transform destroyPoint;
 
-    public void Init(float fallSpeed, Transform dp)
+    public void Init(float s, Transform dp)
     {
-        speed = fallSpeed;
-        destroyPoint = dp;  // This was null before
+        speed = s;
+        destroyPoint = dp;
     }
 
     void Update()
     {
-        if (destroyPoint == null) return;  // Safety check
+        // Safety check – if destroyPoint missing, destroy object but don't crash
+        if (destroyPoint == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         transform.Translate(Vector2.down * speed * Time.deltaTime);
 
