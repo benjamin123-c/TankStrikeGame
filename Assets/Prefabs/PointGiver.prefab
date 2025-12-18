@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3605201235576781806}
   - component: {fileID: 3877417002265509617}
   - component: {fileID: 3507615239818290599}
-  - component: {fileID: -2549461503481430451}
+  - component: {fileID: 8587468325847769432}
   m_Layer: 10
   m_Name: PointGiver
   m_TagString: PointGiver
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.21, y: 0.21}
   m_EdgeRadius: 0
---- !u!114 &-2549461503481430451
+--- !u!114 &8587468325847769432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
