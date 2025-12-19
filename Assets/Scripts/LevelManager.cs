@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
         if (current == level1Scene || current.Contains("Level1"))
             SceneManager.LoadScene(level2Scene);
 
-        if (level2Scene != null && level2Scene != "")
+        else if (level2Scene != null && level2Scene != "")
             SceneManager.LoadScene(level2Scene);
         else
             SceneManager.LoadScene(winScene);
