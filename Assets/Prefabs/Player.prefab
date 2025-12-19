@@ -175,7 +175,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 02623295e4a2c084b8bd0c5a72069c5a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -276,4 +276,5 @@ MonoBehaviour:
   moveSpeed: 7
   hitSound: {fileID: 8300000, guid: 5dd9bbe203f0c8543b2a051e35e11593, type: 3}
   collectSound: {fileID: 8300000, guid: df405fa7adc9a3746b66cfe56ff8984d, type: 3}
-  explosionPrefab: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 34325ce250d3ec0489b825cbc3d8dcd9, type: 3}
+  explosionPrefab: {fileID: 7290149544071057205, guid: ecabb828534c10b45804fd37991ad9c8, type: 3}

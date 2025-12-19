@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Audio & Effects")]
     public AudioClip hitSound;           // Drag hit.wav here
     public AudioClip collectSound;       // Drag collect.wav here
+    public AudioClip deathSound;         // NEW: Drag death/explosion sound here
     public GameObject explosionPrefab;   // Drag explosion particle prefab here
 
     private AudioSource audioSource;
@@ -43,9 +44,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // DEBUG LINE – shows every collision
-        //Debug.Log("Collision with: " + other.name + " Tag: " + other.tag);
-
         // Damage from enemy or bullet
         DamageDealer dd = other.GetComponent<DamageDealer>();
         if (dd != null)
@@ -57,6 +55,13 @@ public class PlayerController : MonoBehaviour
                 Instantiate(explosionPrefab, other.transform.position, Quaternion.identity);
 
             Destroy(other.gameObject);
+
+            // NEW: Check if player died after this hit
+            if (LevelManager.Instance.health <= 0)
+            {
+                PlayerDied();
+            }
+
             return;
         }
 
@@ -67,5 +72,20 @@ public class PlayerController : MonoBehaviour
             audioSource.PlayOneShot(collectSound);
             Destroy(other.gameObject);
         }
+    }
+
+    // NEW METHOD: Handle player death
+    private void PlayerDied()
+    {
+        // Play death sound
+        if (deathSound != null)
+            audioSource.PlayOneShot(deathSound);
+
+        // Big explosion on player
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Destroy the player tank
+        Destroy(gameObject);
     }
 }
